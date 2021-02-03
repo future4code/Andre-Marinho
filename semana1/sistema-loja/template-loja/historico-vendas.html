@@ -10,7 +10,7 @@
 <body>
     <div class="header">
         <div class="header-section">
-        <h1>Controle de Estoque da <em>Dedé's food</em>!</h1>
+        <h1>Histórico de vendas da <em>Dedé's food</em>!</h1>
     </div>
     </div>
 
@@ -23,47 +23,54 @@
         <a href="historico-vendas.html">Histórico de Vendas</a>
     </div>
 
-    <h2>Controle de Estoque</h2>
+    <h2>Histórico de Vendas</h2>
+
+    <form action="">
+        <div>
+            <label for="pesquisa-vendas">Data da venda: </label>
+            <input type="text" id="pesquisa-vendas" name="pesquisa-vendas">
+        </div>
+    </form>
 
     <table>
         <tr>
-            <th>Foto</th>
-            <th>Descrição</th>
-            <th>Preço (R$)</th>
-            <th>Quantidade disponível</th>
+            <th>Produto</th>
+            <th>Horário</th>
+            <th>Funcionário</th>
+            <th>Valor (R$)</th>
+            <th>Forma de Pagamento</th>
         </tr>
 
         <tr>
-            <td><img src="img/arroz.jpg" alt="Foto arroz" width = "100" height = "100"/></td>
             <td> Arroz  </td>
-            <td> 5,00 </td>
-            <td> 100 </td>
+            <td> 
+                <div>
+                <input type="text" id="horario-venda-arroz" name="pesquisa-vendas">
+            </div>
+            </td>
+            <td>
+                 </td>
         </tr>
 
         <tr>
-            <td><img src="img/macarrao.jpg" alt="Foto macarrão" width = "100" height = "100"/></td>
             <td> Macarrão </td>
             <td> 2,00 </td>
             <td> 400 </td>
         </tr>
 
         <tr>
-            <td><img src="img/feijao.jpg" alt="Foto feijao" width = "100" height = "100"/></td>
             <td> Feijão </td>
             <td> 4,00 </td>
             <td> 200 </td>
         </tr>
 
-        <tr>
-            <td><img src="img/manteiga.jpg" alt="Foto manteiga" width = "100" height = "100"/></td>
+        <tr>            
             <td> Manteiga </td>
             <td> 4,00 </td>
             <td> 150 </td>
         </tr>
         
-        <!-- Crie mais uma linha desta tabela abaixo \/ -->
-        <tr>
-            <td><img src= "img/bolacha.jpg" alt="Foto bolacha" width = "100" height = "100"/></td>
+        <tr>            
             <td> Bolacha </td>
             <td> 1,00 </td>
             <td> 500 </td>
