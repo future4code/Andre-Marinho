@@ -26,6 +26,12 @@ button:focus {
     color: white;
 }
 
+button:hover {
+    color: white;
+    background-color: #f0c20a;
+}
+
+
 img {
     width: 50px;   
 }
@@ -148,5 +154,10 @@ td button {
 }
 
 #back-button:hover {
-    background-color: #635a3d
+    background-color: #f7f1df
+    
+}
+
+#back-button:active {
+    color: #f7f1df;
 }
