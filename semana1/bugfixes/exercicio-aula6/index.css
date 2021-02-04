@@ -27,8 +27,11 @@ button:focus {
 }
 
 img {
-    width: 50px;
-    
+    width: 50px;   
+}
+
+#imagem-lupa {
+    width: 15px;
 }
 
 div>p:first-child {
@@ -36,7 +39,7 @@ div>p:first-child {
 }
 
 div img {
-    background: white;
+    background: none;
 }
 
 .botao-amarelo {
