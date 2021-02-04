@@ -48,6 +48,32 @@
     font-size: 16px;
   }
 
+table {
+  margin:auto;
+  border-style: outset;
+  text-align: center;
+  /* border: 1px black dotted; */
+  /* display: block;
+  width: 1000px; */
+} 
+tr {
+  margin:auto;
+  text-align: center;
+  border-style: outset;
+  width: 100px;
+} 
+td {
+  margin:auto;
+  text-align: center;
+  border-style: ridge;
+  width: 100px;
+} 
+th {
+  background-color: aliceblue;
+  font-size: larger;
+  padding: 20px;
+  border-style: ridge;
+}
 li {
     position: relative;
     list-style-type: none;
@@ -82,5 +108,19 @@ body{
     color: white;
     padding: 18px;
     background-color: lightseagreen;
-    font-size:8px;
+    font-size:12px;
   }
+
+form {
+  text-align: center;
+  margin:auto;
+}
+
+.formulario-venda {
+  
+  left:95px;
+  top:23px;
+  width:225px;
+  margin:auto;
+}
+
