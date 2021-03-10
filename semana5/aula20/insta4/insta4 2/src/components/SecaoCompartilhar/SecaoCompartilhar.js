@@ -9,10 +9,17 @@ export class SecaoCompartilhar extends Component {
     state = {
         twitter: false,
         instagram: false,
-        facebook: false
+        facebook: false,
+        valor: ''
     }
 
-    onClickInsta = () => {
+    onComentario = (event) => {
+        this.setState({
+			valor: event.target.value
+		})
+    }
+
+    onClickInsta = (event) => {
         if (this.state.instagram === false) {
             console.log("Post compartilhado no Instagram")
             this.setState({
@@ -22,7 +29,11 @@ export class SecaoCompartilhar extends Component {
             this.setState({
               twitter: false
             })
-          }  
+          }
+          console.log(this.state.valor)
+          this.setState({
+            valor: ''
+          })
         }    
 
     onClickFacebook = () => {
@@ -35,7 +46,11 @@ export class SecaoCompartilhar extends Component {
             this.setState({
               facebook: false
             })
-          }  
+          }
+          console.log(this.state.valor)
+          this.setState({
+            valor: ''
+          })  
         }
 
         onClickTwitter = () => {
@@ -48,11 +63,16 @@ export class SecaoCompartilhar extends Component {
                 this.setState({
                   facebook: false
                 })
-              }  
+              }
+              console.log(this.state.valor)
+              this.setState({
+                valor: ''
+              })  
             }
 
     render() {
-		return <div className={'share-container'}>
+		return <div> 
+              <div className={'share-container'}>
                 <IconeComContador
                     icone={iconeInsta}
                     onClickIcone={this.onClickInsta}
@@ -68,6 +88,16 @@ export class SecaoCompartilhar extends Component {
                     onClickIcone={this.onClickTwitter}
                 />
 
-		</div>
+		          </div>
+              <div className={'sharefor-container'}>
+			          <input
+				        className={'input-compartilhar'}
+				        placeholder={'Faça um comentário ao compartilhar'}
+				        value={this.state.valor}
+				        onChange={this.onComentario}
+			          />
+		          </div>
+            </div>
+            
 	}
 }
