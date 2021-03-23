@@ -15,7 +15,8 @@ export default class App extends React.Component {
   state = {
     users:[],
     inputNome: '',
-    inputEmail: ''
+    inputEmail: '',
+    change: true
   };
 
   componentDidMount() {
@@ -43,6 +44,9 @@ export default class App extends React.Component {
     })
   }
 
+  changePage = () => {
+    this.setState({change: !this.state.change})
+  }
 
   createUser = () => {
     const body =  {
@@ -58,6 +62,7 @@ export default class App extends React.Component {
       }
     ).then((res) => {
       console.log(res.data);
+      this.getAllUsers()
       this.setState({inputNome:'',inputEmail:''})
     }).catch((err) => {
       console.log(err.response.data)
@@ -74,6 +79,7 @@ export default class App extends React.Component {
       }
     ).then((res => {
       console.log(res.data);
+      this.getAllUsers()
     })).catch((err)=> {
       console.log(err.response.data);
     })
@@ -81,27 +87,37 @@ export default class App extends React.Component {
 
   render () {
     const usersList = this.state.users.map((user) => <li key={user.id}>{user.name}&nbsp;<span onClick={() => this.deleteUser(user.id)}>&nbsp;X</span></li>)
-    return (
-    <div>
-      <button onClick={this.getAllUsers}>Ir para página de lista</button>
+
+    if (this.state.change === true) {
+      return (
       <div>
-        <DivPost>
-          <div>
-            <label>Nome:</label>
-            <input value={this.state.inputNome} onChange={this.handleInputNomeChange}/>
-          </div>
-          <div>
-            <label>E-mail:</label>
-            <input value={this.state.inputEmail} onChange={this.handleInputEmailChange}/>
-          </div>
-          <button onClick={this.createUser}>Salvar</button>
-        </DivPost>
+        <button onClick={() => this.changePage()}>Ir para página de lista</button>
+        <div>
+          <DivPost>
+            <div>
+              <label>Nome:</label>
+              <input value={this.state.inputNome} onChange={this.handleInputNomeChange}/>
+            </div>
+            <div>
+              <label>E-mail:</label>
+              <input value={this.state.inputEmail} onChange={this.handleInputEmailChange}/>
+            </div>
+            <button onClick={this.createUser}>Salvar</button>
+          </DivPost>
+        </div>
+      </div>)    
+    } else {
+      return (
+      <div>
+        <button onClick={() => this.changePage()}>Ir para página de registo</button>
+        <h2>Usuários Cadastrados</h2>
         <DivUsuarios>
-          <ul>{usersList}</ul>
+            <ul>{usersList}</ul>
         </DivUsuarios>
       </div>
-    </div>
-    )
+
+      )
+    } 
   }
   
 };
