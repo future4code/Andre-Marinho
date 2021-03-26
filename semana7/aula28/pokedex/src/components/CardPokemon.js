@@ -74,6 +74,7 @@ export default class CardPokemon extends React.Component {
     getPokemon = async (event) => {
         try {           
             const url = event.target.value
+            console.log(url)
             const response = await axios.get(`${url}`)
             this.setState({picture: response.data.sprites.front_default})
             this.setState({id: response.data.id})
@@ -88,17 +89,29 @@ export default class CardPokemon extends React.Component {
 
     render() {
         const pokeList = this.state.pokemons.map((poke) => {
-             return <option key={poke.name} value={poke.url}>{poke.name}</option>
-
+             return(<option key={poke.name} value={poke.url}>{poke.name}</option>)
         })
+
+        const pokeAll = this.state.pokemons.map((poke) => {
+            return(<div>
+                       <PokeDiv>
+                        <PokeName>{poke.name}</PokeName>
+                        <PokeImg>
+                            <img src={this.state.picture} alt={"pokemon's picture"}/>
+                        </PokeImg>                    
+                    </PokeDiv>
+                   </div>)
+                   })
+        
         return(
         <div>
             <PokeSelect>
                 <select onChange={this.getPokemon}>
                     <option>Choose a pokemon</option>
                     {pokeList}
-                </select>
+                </select>    
             </PokeSelect>
+            {pokeAll}
             {this.state.picture && (
                  <Div2>
                     <PokeDiv>
@@ -117,7 +130,6 @@ export default class CardPokemon extends React.Component {
                                 <strong>Type:</strong> {this.state.type}
                             </P>
                             <P>
-
                                 <strong>Number:</strong> {this.state.id}
                             </P>
                         </PokeCaract>
