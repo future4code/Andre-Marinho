@@ -9,3 +9,12 @@ export const goToLoginPage = (history) => {
 export const goToApplicationFormPage = (history) => {
     history.push('/trips/application');
 }
+
+export const goToTripDetailsPage = (history) => {
+    history.push('/admin/trips/:id');
+}
+
+export const goToAdminHomePage = (history) => {
+    history.push('/admin/trips/list');
+}
+
