@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useProtectedPage } from '../hooks/useProtectedPage';
 import { baseUrl } from '../parameters';
-import { goToLoginPage, goToTripDetailsPage } from '../routes/coordinator';
+import { goToLoginPage, goToTripDetailsPage, goToHomePage, goToCreateTripPage } from '../routes/coordinator';
 
 const AdminHomePage = () => {
     useProtectedPage()
@@ -24,20 +24,17 @@ const AdminHomePage = () => {
             console.log(err)
         })
     }
-    
+
     const getTripDetail = (id) => {
         const token = window.localStorage.getItem('token')
-         
         axios.get(baseUrl+`/trip/${id}`,{
             headers: {
                 auth: token
             }
         })
         .then((res) => {
-            const trip = window.localStorage.setItem('trip', JSON.stringify(res.data.trip))
-            console.log(res.data.trip)
-            goToTripDetailsPage(history)
-            
+            const id = window.localStorage.setItem('id', JSON.stringify(res.data.trip.id))
+            goToTripDetailsPage(history)  
         })
         .catch((err) => {
             console.log(err)
@@ -51,26 +48,24 @@ const AdminHomePage = () => {
 
     const deleteTrip = (id) => {
         const token = window.localStorage.getItem('token')
-        
         axios.delete(baseUrl+`/trips/${id}`, {
             headers: {
                 auth:token
             }
         })
         .then((res)=> {
-            console.log(res)
-            allTrips()
+            alert('Viagem deletada com sucesso')
+            allTrips()            
         })
         .catch((err) => {
             console.log(err)
-        })
-        
+        })      
     }
     
     return( <>
                 <h1>Página do Admin</h1>
-                <button>Voltar</button>
-                <button>Criar Viagem</button>
+                <button onClick={() => goToHomePage(history)}>Voltar</button>
+                <button onClick={() => goToCreateTripPage(history)}>Criar Viagem</button>
                 <button onClick={logout}>Logout</button>
                 {trips.map((trip) => {
                     return (<div>

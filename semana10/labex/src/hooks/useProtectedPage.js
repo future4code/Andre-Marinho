@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { goToLoginPage } from '../routes/coordinator';
 
@@ -11,5 +11,5 @@ export const useProtectedPage = () => {
         if (!token) {
             goToLoginPage(history)
         }
-    },[])
+    },[history])
 }

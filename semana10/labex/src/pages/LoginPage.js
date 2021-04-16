@@ -1,21 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import useInput from '../hooks/useInput';
 import { baseUrl } from '../parameters';
-import { goToAdminHomePage } from '../routes/coordinator';
+import { goToAdminHomePage, goToHomePage } from '../routes/coordinator';
+
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const history = useHistory()
-
-    const handleEmail = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const handlePassword = (e) => {
-        setPassword(e.target.value)
-    }
+    const [email, handleEmail] = useInput('')
+    const [password, handlePassword] = useInput('')
 
     const login = () => {
         const body = {
@@ -36,9 +30,10 @@ const LoginPage = () => {
 
     return( <>
                 <h1>Login Page</h1>
-                <input onChange={handleEmail} value={email} placeholder='E-mail'/>
-                <input onChange={handlePassword} value={password} placeholder='Senha'/>
+                <input onChange={handleEmail} value={email} type='email' placeholder='E-mail' request/>
+                <input onChange={handlePassword} value={password} type='password' placeholder='Senha' request/>
                 <button onClick={login}>Login</button>
+                <button onClick={() => goToHomePage(history)}>Voltar</button>
             </>
             
             )
