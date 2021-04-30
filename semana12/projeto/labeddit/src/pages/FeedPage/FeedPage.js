@@ -30,6 +30,7 @@ const FeedPage = () => {
                     commentsCount={post.commentsCount}
                     onClick={() => onClickCard(post.id)}
                     id={post.id}
+                    setFeed = {setFeed}
                 />  
                 )
     })
