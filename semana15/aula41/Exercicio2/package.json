@@ -1,0 +1,21 @@
+{
+  "name": "exercicio2",
+  "version": "1.0.0",
+  "description": "exercicio 2 da aula 41",
+  "main": "Exercicio2.js",
+  "scripts": {
+    "start": "clear && node Exercicio2.js"
+  },
+  "keywords": [
+    "node",
+    "package"
+  ],
+  "author": "labenu",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.26.0"
+  },
+  "dependencies": {
+    "knex": "^0.95.5"
+  }
+}
