@@ -6,7 +6,7 @@ type UserAccount = {
   cpf: string,
   dateOfBirth: string,
   balance: number,
-  extract: []
+  extract: Transactions[]
 }
 
 type Transactions = {
@@ -44,27 +44,43 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.post('/users', (req: Request, res: Response) => {
+app.get('/users', (req: Request, res: Response) => {
+  try {
+    res
+    .status(200)
+    .send(users)
+    
+  } catch (err) {
+    res.status(400).send({
+    message: err.message
+    })
+  }
+})
+
+app.post('/users/create', (req: Request, res: Response) => {
   try {
 
     const name = req.body.name
     const cpf = req.body.cpf
     const dateOfBirth = req.body.dateOfBirth
     const balance = req.body.balance
-    req.body.extract = []
+    let extract : Transactions[] = []
 
     const newUserAccount = {
       name,
       cpf,
       dateOfBirth,
       balance,
-      
+      extract
     }
 
     users.push(newUserAccount)
 
     
-    res.status(200).send()
+    res.status(200).send({
+      message: 'ok',
+      user: newUserAccount
+    })
   } catch (err) {
     res.status(400).send({
       message: err.message
