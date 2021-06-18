@@ -19,7 +19,16 @@ export default async function signup(
           message = '"name", "email" and "password" must be provided'
           throw new Error(message)
        }
- 
+       
+       const [user] = await connection(userTableName)
+         .where({email})
+
+      if(user){
+         res.statusCode = 409
+         message = "Email is already in use"
+         throw new Error(message)
+      }
+
        const id: string = generateId()
        
        const cypherPassword: string = generateHash(password);

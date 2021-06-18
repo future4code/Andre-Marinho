@@ -15,7 +15,19 @@ export default async function createPost(
         const { photo, description, type } = req.body
         
         const tokenData = getTokenData(token!)
-  
+
+        if (!tokenData) {
+            res.statusCode = 401
+            message = "Token unauthorized!"
+            throw new Error(message)
+        }
+
+        if (!type || !description) {
+            res.statusCode = 422
+            message = "Description and type required!"
+            throw new Error(message)
+        }
+
         const id: string = generateId()
   
         await connection(postTableName)

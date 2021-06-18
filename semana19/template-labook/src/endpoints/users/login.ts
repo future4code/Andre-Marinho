@@ -9,45 +9,33 @@ export default async function login(
     res: Response
 ): Promise<void> {
     try {
-        let message = "Success!"
+         let message = "Success!"
  
-       const { email, password } = req.body
+         const { email, password } = req.body
  
-       if (!email || !password) {
-          res.statusCode = 406
-          message = '"email" and "password" must be provided'
-          throw new Error(message)
-       }
+         if (!email || !password) {
+            res.statusCode = 406
+            message = '"email" and "password" must be provided'
+            throw new Error(message)
+         }
  
-       const [user] = await connection(userTableName)
+         const [user] = await connection(userTableName)
           .where({ email })
  
-       if (!user) {
-          res.statusCode = 401
-          message = "Invalid credentials"
-          throw new Error(message)
-       }
+          
+         const passwordIsCorrect: boolean = compareHash(password, user.password)
+          
+         if (!user || !passwordIsCorrect) {
+            res.statusCode = 401
+            message = "Invalid credentials"
+            throw new Error(message)
+         }
+
+         const token: string = generateToken({
+            id: user.id
+         })
  
-    //    const user: user = {
-    //       id: queryResult[0].id,
-    //       name: queryResult[0].name,
-    //       email: queryResult[0].email,
-    //       password: queryResult[0].password
-    //    }
- 
-       const passwordIsCorrect: boolean = compareHash(password, user.password)
- 
-       if (!passwordIsCorrect) { 
-          res.statusCode = 401
-          message = "Invalid credentials"
-          throw new Error(message)
-       } 
- 
-       const token: string = generateToken({
-          id: user.id
-       })
- 
-       res.status(200).send({ message, token })
+         res.status(200).send({ message, token })
     } catch (error) {
         let message = error.sqlMessage || error.message
         res.statusCode = 400
